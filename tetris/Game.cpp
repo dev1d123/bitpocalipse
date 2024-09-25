@@ -184,116 +184,60 @@ class Board{
 		bool state(){
 			return true;
 		}
-		void newPiece(){
-			int pieza = (std::rand() % 7);
-			std::cout<<"La pieza generada es ";
-			
-			if(pieza == 0){
-				std::cout<<"I"<<std::endl;
-				I_Tetro p;
-				std::vector<std::vector<int>> sh = p.getShape();
-				for(int i = 0; i < sh.size(); i++){
-					for(int j = 0; j < sh[0].size(); j++){
-						if(sh[i][j] == 1) std::cout<<'#';
-						else std::cout<<' ';
-					}
-					std::cout<<std::endl;
-				}
-				std::cout<<std::endl;
-				std::cout<<"Creado "<<sh.size()<<std::endl;
-				//agregar la pieza a la matriz
-				
-			}else if(pieza == 1){
-				std::cout<<"O"<<std::endl;
-				
-				O_Tetro p;
-				std::vector<std::vector<int>> sh = p.getShape();
-				for(int i = 0; i < sh.size(); i++){
-					for(int j = 0; j < sh[0].size(); j++){
-						if(sh[i][j] == 1) std::cout<<'#';
-						else std::cout<<' ';
-					}
-					std::cout<<std::endl;
-				}
-				std::cout<<std::endl;
-				std::cout<<"Creado "<<sh.size()<<std::endl;
-				
-			}else if(pieza == 2){
-				std::cout<<"T"<<std::endl;
-
-				T_Tetro p;
-				std::vector<std::vector<int>> sh = p.getShape();
-				for(int i = 0; i < sh.size(); i++){
-					for(int j = 0; j < sh[0].size(); j++){
-						if(sh[i][j] == 1) std::cout<<'#';
-						else std::cout<<' ';
-					}
-					std::cout<<std::endl;
-				}
-				std::cout<<std::endl;
-				std::cout<<"Creado "<<sh.size()<<std::endl;
-				
-			}else if(pieza == 3){
-				std::cout<<"S"<<std::endl;
-				
-				S_Tetro p;
-				std::vector<std::vector<int>> sh = p.getShape();
-				for(int i = 0; i < sh.size(); i++){
-					for(int j = 0; j < sh[0].size(); j++){
-						if(sh[i][j] == 1) std::cout<<'#';
-						else std::cout<<' ';
-					}
-					std::cout<<std::endl;
-				}
-				std::cout<<std::endl;
-				std::cout<<"Creado "<<sh.size()<<std::endl;
-				
-			}else if(pieza == 4){
-				std::cout<<"Z"<<std::endl;
-				
-				Z_Tetro p;
-				std::vector<std::vector<int>> sh = p.getShape();
-				for(int i = 0; i < sh.size(); i++){
-					for(int j = 0; j < sh[0].size(); j++){
-						if(sh[i][j] == 1) std::cout<<'#';
-						else std::cout<<' ';
-					}
-					std::cout<<std::endl;
-				}
-				std::cout<<std::endl;
-				std::cout<<"Creado "<<sh.size()<<std::endl;
-				
-			}else if(pieza == 5){
-				std::cout<<"J"<<std::endl;
-				
-				J_Tetro p;
-				std::vector<std::vector<int>> sh = p.getShape();
-				for(int i = 0; i < sh.size(); i++){
-					for(int j = 0; j < sh[0].size(); j++){
-						if(sh[i][j] == 1) std::cout<<'#';
-						else std::cout<<' ';
-					}
-					std::cout<<std::endl;
-				}
-				std::cout<<std::endl;
-				std::cout<<"Creado "<<sh.size()<<std::endl;
-				
-			}else if(pieza == 6){
-				std::cout<<"L"<<std::endl;
-				
-				L_Tetro p;
-				std::vector<std::vector<int>> sh = p.getShape();
-				for(int i = 0; i < sh.size(); i++){
-					for(int j = 0; j < sh[0].size(); j++){
-						if(sh[i][j] == 1) std::cout<<'#';
-						else std::cout<<' ';
-					}
-					std::cout<<std::endl;
-				}
-				std::cout<<std::endl;
-				std::cout<<"Creado "<<sh.size()<<std::endl;
-			}
+		void printShape(const Tetromino& tetro) {
+		    std::vector<std::vector<int>> sh = tetro.getShape();
+		    for(int i = 0; i < sh.size(); i++) {
+		        for(int j = 0; j < sh[0].size(); j++) {
+		            if(sh[i][j] == 1) std::cout << '#';
+		            else std::cout << ' ';
+		        }
+		        std::cout << std::endl;
+		    }
+		    std::cout << std::endl;
+		    std::cout << "Creado " << sh.size() << std::endl;
 		}
+		
+		void newPiece() {
+		    int pieza = (std::rand() % 7);
+		    Tetromino* tetromino = nullptr;
+		
+		    switch (pieza) {
+		        case 0: 
+		            std::cout << "I" << std::endl;
+		            tetromino = new I_Tetro();
+		            break;
+		        case 1: 
+		            std::cout << "O" << std::endl;
+		            tetromino = new O_Tetro();
+		            break;
+		        case 2: 
+		            std::cout << "T" << std::endl;
+		            tetromino = new T_Tetro();
+		            break;
+		        case 3: 
+		            std::cout << "S" << std::endl;
+		            tetromino = new S_Tetro();
+		            break;
+		        case 4: 
+		            std::cout << "Z" << std::endl;
+		            tetromino = new Z_Tetro();
+		            break;
+		        case 5: 
+		            std::cout << "J" << std::endl;
+		            tetromino = new J_Tetro();
+		            break;
+		        case 6: 
+		            std::cout << "L" << std::endl;
+		            tetromino = new L_Tetro();
+		            break;
+		    }
+		
+		    if (tetromino) {
+		        printShape(*tetromino);
+		        delete tetromino;  // Liberar memoria
+		    }
+		}
+
 	
 		void message(){
 		    std::cout<<"This work!!!"<<std::endl;
