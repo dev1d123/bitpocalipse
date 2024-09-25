@@ -17,6 +17,33 @@ class Tetromino {
 			posY = y;
 		}
 };
+class I_Tetro: public Tetromino{
+	public:
+		I_Tetro(){
+			shape={
+				{1, 1, 1, 1}
+			};
+		}
+		
+		//sobrescribir el virtual rotate
+		void rotate() override {
+			if(shape.size() == 1){
+				//si es horizontal
+				shape={
+					{1},
+					{1},
+					{1},
+					{1}
+				};
+			}else{
+				shape={
+					{1, 1, 1, 1}
+				};
+			}
+		}
+};
+
+
 
 class Board{
     private:
