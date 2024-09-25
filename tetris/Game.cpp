@@ -45,7 +45,7 @@ class I_Tetro: public Tetromino{
 
 class O_Tetro: public Tetromino{
 	public:
-		o_Tetro(){
+		O_Tetro(){
 			shape={
 				{1, 1},
 				{1, 1}
@@ -67,7 +67,7 @@ class T_Tetro: public Tetromino{
 		}
 		
 		void rotate() override {
-			std::vector<std::vector<int>> newShape(shape[0].size()), std::vector<int>(shape.size()))); //invertir
+			std::vector<std::vector<int>> newShape(shape[0].size(), std::vector<int>(shape.size())); //invertir
 			for(int i = 0; i < shape.size(); i++){
 				for(int j = 0; j < shape[0].size(); j++){
 					//rotate 90° algo
@@ -78,6 +78,81 @@ class T_Tetro: public Tetromino{
 		}
 };
 
+class S_Tetro: public Tetromino{
+	public:
+		S_Tetro(){
+			shape={
+				{0, 1, 1},
+				{1, 1, 0}
+			};
+		}
+		
+		void rotate() override {
+			std::vector<std::vector<int>> newShape(shape[0].size(), std::vector<int>(shape.size())); //invertir
+			for(int i = 0; i < shape.size(); i++){
+				for(int j = 0; j < shape[0].size(); j++){
+					newShape[j][shape.size() - 1 - i] =  shape[i][j];
+				}
+			}
+			shape = newShape;
+		}
+};
+class Z_Tetro: public Tetromino{
+	public:
+		Z_Tetro(){
+			shape={
+				{1, 1, 0},
+				{0, 1, 1}
+			};
+		}
+		
+		void rotate() override {
+			std::vector<std::vector<int>> newShape(shape[0].size(), std::vector<int>(shape.size())); //invertir
+			for(int i = 0; i < shape.size(); i++){
+				for(int j = 0; j < shape[0].size(); j++){
+					newShape[j][shape.size() - 1 - i] =  shape[i][j];
+				}
+			}
+			shape = newShape;
+		}
+};
+class J_Tetro: public Tetromino{
+	public:
+		J_Tetro(){
+			shape={
+				{1, 0, 0},
+				{1, 1, 1}
+			};
+		}
+		
+		void rotate() override {
+			std::vector<std::vector<int>> newShape(shape[0].size(), std::vector<int>(shape.size())); //invertir
+			for(int i = 0; i < shape.size(); i++){
+				for(int j = 0; j < shape[0].size(); j++){
+					newShape[j][shape.size() - 1 - i] =  shape[i][j];
+				}
+			}
+			shape = newShape;
+		}
+};
+class L_Tetro: public Tetromino{
+	public:
+		L_Tetro(){
+			shape={
+				{0, 0, 1},
+				{1, 1, 1}
+			};
+		}
+		void rotate() override {
+			std::vector<std::vector<int>> newShape(shape[0].size(), std::vector<int>(shape.size())); //invertir
+			for(int i = 0; i < shape.size(); i++){
+				for(int j = 0; j < shape[0].size(); j++){
+					newShape[j][shape.size() - 1 - i] =  shape[i][j];
+				}
+			}
+			shape = newShape;
+		}
+};
 class Board{
     private:
 		static const int WIDTH = 10;
@@ -98,7 +173,9 @@ class Board{
 		std::cout<<"WIDTH: "<<WIDTH<<"\tHEIGHT: "<<HEIGHT<<std::endl;	
 	}
 	//Draws the board with all Pieces...ya know
-	
+    char* getArray() {
+        return &arr[0][0];  // Retorna un puntero al primer elemento del arreglo 2D
+    }
 	void draw(){
 		
 		for(int i = 0; i < HEIGHT; i++){
@@ -134,6 +211,9 @@ public:
 		for(int i = 0; i < 10; i++){
 			system("cls");
 			std::cout<<"Iteracion: "<<i<<std::endl;
+    		char* boardArray = b.getArray();
+    		boardArray[4 * 10 + 5] = 'p';  // Equivalente a arr[4][5]
+			
 			b.message();
 			//si la pieza ha llegado al final.
 			//Verificar si se ha completado un espacio
@@ -144,7 +224,7 @@ public:
 			}
 			
 			b.draw();	
-			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		}
 		
     }
