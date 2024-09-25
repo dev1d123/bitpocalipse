@@ -16,6 +16,9 @@ class Tetromino {
 			posX = x;
 			posY = y;
 		}
+		void fall(){
+			posY--;
+		}
 };
 class I_Tetro: public Tetromino{
 	public:
@@ -25,10 +28,8 @@ class I_Tetro: public Tetromino{
 			};
 		}
 		
-		//sobrescribir el virtual rotate
 		void rotate() override {
 			if(shape.size() == 1){
-				//si es horizontal
 				shape={
 					{1},
 					{1},
@@ -159,46 +160,169 @@ class Board{
 		static const int HEIGHT = 20;
 		char arr[HEIGHT][WIDTH];
 		//Pieza actual
+		Tetromino* actualPiece;
+	
 	public:
-		
-	bool state(){
-		return false;
-	}
-	void newPiece(){
-		//agregar una nueva pieza al tablero!!!
-	}
+		Board(){
+				
+			for(int i = 0; i < HEIGHT; i++){
+				for(int j = 0; j < WIDTH; j++){
+					arr[i][j] = '.';
+				}
+			}
+			
+		}
+	    char getCell(int row, int col) const {
+	        return arr[row][col];
+	    }
+	
+	    void setCell(int row, int col, char value) {
+	        arr[row][col] = value;
+	    }
+	    
+	    
+		bool state(){
+			return true;
+		}
+		void newPiece(){
+			int pieza = (std::rand() % 7);
+			std::cout<<"La pieza generada es ";
+			
+			if(pieza == 0){
+				std::cout<<"I"<<std::endl;
+				I_Tetro p;
+				std::vector<std::vector<int>> sh = p.getShape();
+				for(int i = 0; i < sh.size(); i++){
+					for(int j = 0; j < sh[0].size(); j++){
+						if(sh[i][j] == 1) std::cout<<'#';
+						else std::cout<<' ';
+					}
+					std::cout<<std::endl;
+				}
+				std::cout<<std::endl;
+				std::cout<<"Creado "<<sh.size()<<std::endl;
+				//agregar la pieza a la matriz
+				
+			}else if(pieza == 1){
+				std::cout<<"O"<<std::endl;
+				
+				O_Tetro p;
+				std::vector<std::vector<int>> sh = p.getShape();
+				for(int i = 0; i < sh.size(); i++){
+					for(int j = 0; j < sh[0].size(); j++){
+						if(sh[i][j] == 1) std::cout<<'#';
+						else std::cout<<' ';
+					}
+					std::cout<<std::endl;
+				}
+				std::cout<<std::endl;
+				std::cout<<"Creado "<<sh.size()<<std::endl;
+				
+			}else if(pieza == 2){
+				std::cout<<"T"<<std::endl;
 
-	void message(){
-	    std::cout<<"This work!!!"<<std::endl;
-		std::cout<<"WIDTH: "<<WIDTH<<"\tHEIGHT: "<<HEIGHT<<std::endl;	
-	}
-	//Draws the board with all Pieces...ya know
-    char* getArray() {
-        return &arr[0][0];  // Retorna un puntero al primer elemento del arreglo 2D
-    }
-	void draw(){
-		
-		for(int i = 0; i < HEIGHT; i++){
-			for(int j = 0; j < WIDTH; j++){
-				arr[i][j] = '.';
+				T_Tetro p;
+				std::vector<std::vector<int>> sh = p.getShape();
+				for(int i = 0; i < sh.size(); i++){
+					for(int j = 0; j < sh[0].size(); j++){
+						if(sh[i][j] == 1) std::cout<<'#';
+						else std::cout<<' ';
+					}
+					std::cout<<std::endl;
+				}
+				std::cout<<std::endl;
+				std::cout<<"Creado "<<sh.size()<<std::endl;
+				
+			}else if(pieza == 3){
+				std::cout<<"S"<<std::endl;
+				
+				S_Tetro p;
+				std::vector<std::vector<int>> sh = p.getShape();
+				for(int i = 0; i < sh.size(); i++){
+					for(int j = 0; j < sh[0].size(); j++){
+						if(sh[i][j] == 1) std::cout<<'#';
+						else std::cout<<' ';
+					}
+					std::cout<<std::endl;
+				}
+				std::cout<<std::endl;
+				std::cout<<"Creado "<<sh.size()<<std::endl;
+				
+			}else if(pieza == 4){
+				std::cout<<"Z"<<std::endl;
+				
+				Z_Tetro p;
+				std::vector<std::vector<int>> sh = p.getShape();
+				for(int i = 0; i < sh.size(); i++){
+					for(int j = 0; j < sh[0].size(); j++){
+						if(sh[i][j] == 1) std::cout<<'#';
+						else std::cout<<' ';
+					}
+					std::cout<<std::endl;
+				}
+				std::cout<<std::endl;
+				std::cout<<"Creado "<<sh.size()<<std::endl;
+				
+			}else if(pieza == 5){
+				std::cout<<"J"<<std::endl;
+				
+				J_Tetro p;
+				std::vector<std::vector<int>> sh = p.getShape();
+				for(int i = 0; i < sh.size(); i++){
+					for(int j = 0; j < sh[0].size(); j++){
+						if(sh[i][j] == 1) std::cout<<'#';
+						else std::cout<<' ';
+					}
+					std::cout<<std::endl;
+				}
+				std::cout<<std::endl;
+				std::cout<<"Creado "<<sh.size()<<std::endl;
+				
+			}else if(pieza == 6){
+				std::cout<<"L"<<std::endl;
+				
+				L_Tetro p;
+				std::vector<std::vector<int>> sh = p.getShape();
+				for(int i = 0; i < sh.size(); i++){
+					for(int j = 0; j < sh[0].size(); j++){
+						if(sh[i][j] == 1) std::cout<<'#';
+						else std::cout<<' ';
+					}
+					std::cout<<std::endl;
+				}
+				std::cout<<std::endl;
+				std::cout<<"Creado "<<sh.size()<<std::endl;
 			}
 		}
-		
-		/*
-		arr[4][5] = '*';
-		arr[4][6] = '*';
-		arr[4][7] = '*';
-		arr[4][8] = '*';
-		*/
-		//dibujar la pieza con el arreglo
-		for(int i = 0; i < HEIGHT; i++){
-			for(int j = 0; j < WIDTH; j++){
-				std::cout<<arr[i][j]<<" ";
-			}
-			std::cout<<'\n';
+	
+		void message(){
+		    std::cout<<"This work!!!"<<std::endl;
+			std::cout<<"WIDTH: "<<WIDTH<<"\tHEIGHT: "<<HEIGHT<<std::endl;	
 		}
-		//disminuir la altura de la pieza
-	}
+		//Draws the board with all Pieces...ya know
+	    char* getArray() {
+	        return &arr[0][0];  // Retorna un puntero al primer elemento del arreglo 2D
+	    }
+	    
+	    
+	    
+		void draw(){
+	
+			/*
+			arr[4][5] = '*';
+			arr[4][6] = '*';
+			arr[4][7] = '*';
+			arr[4][8] = '*';
+			*/
+			//dibujar la pieza con el arreglo
+			for(int i = 0; i < HEIGHT; i++){
+				for(int j = 0; j < WIDTH; j++){
+					std::cout<<arr[i][j]<<" ";
+				}
+				std::cout<<'\n';
+			}
+			//disminuir la altura de la pieza
+		}
 
 };
 
@@ -211,9 +335,9 @@ public:
 		for(int i = 0; i < 10; i++){
 			system("cls");
 			std::cout<<"Iteracion: "<<i<<std::endl;
-    		char* boardArray = b.getArray();
-    		boardArray[4 * 10 + 5] = 'p';  // Equivalente a arr[4][5]
 			
+        	b.setCell(3+i, 4, 'X');
+        	
 			b.message();
 			//si la pieza ha llegado al final.
 			//Verificar si se ha completado un espacio
