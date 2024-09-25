@@ -43,7 +43,40 @@ class I_Tetro: public Tetromino{
 		}
 };
 
-
+class O_Tetro: public Tetromino{
+	public:
+		o_Tetro(){
+			shape={
+				{1, 1},
+				{1, 1}
+			};
+		}
+		
+		//sobrescribir el virtual rotate
+		void rotate() override {
+			// :)
+		}
+};
+class T_Tetro: public Tetromino{
+	public:
+		T_Tetro(){
+			shape={
+				{0, 1, 0},
+				{1, 1, 1}
+			};
+		}
+		
+		void rotate() override {
+			std::vector<std::vector<int>> newShape(shape[0].size()), std::vector<int>(shape.size()))); //invertir
+			for(int i = 0; i < shape.size(); i++){
+				for(int j = 0; j < shape[0].size(); j++){
+					//rotate 90° algo
+					newShape[j][shape.size() - 1 - i] =  shape[i][j];
+				}
+			}
+			shape = newShape;
+		}
+};
 
 class Board{
     private:
