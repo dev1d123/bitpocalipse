@@ -160,6 +160,7 @@ class Board{
 		static const int HEIGHT = 20;
 		char arr[HEIGHT][WIDTH];
 		//Pieza actual
+		
 		Tetromino* actualPiece;
 	
 	public:
@@ -231,8 +232,8 @@ class Board{
 		            tetromino = new L_Tetro();
 		            break;
 		    }
-		
 		    if (tetromino) {
+		    	actualPiece = tetromino;
 		        printShape(*tetromino);
 		        delete tetromino;  // Liberar memoria
 		    }
@@ -280,7 +281,7 @@ public:
 			system("cls");
 			std::cout<<"Iteracion: "<<i<<std::endl;
 			
-        	b.setCell(3+i, 4, 'X');
+        	//b.setCell(3+i, 4, 'X');
         	
 			b.message();
 			//si la pieza ha llegado al final.
@@ -288,6 +289,7 @@ public:
 			//generar una nueva pieza
 			
 			if(b.state()){
+				std::cout<<"Creando nueva pieza"<<std::endl;
 				b.newPiece();
 			}
 			
